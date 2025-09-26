@@ -1,0 +1,425 @@
+[gd_scene load_steps=13 format=3 uid="uid://4ylr61b08svt"]
+
+[ext_resource type="Script" uid="uid://i3hvarp6l44t" path="res://Scripts/game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://bbmpq6yi56x30" path="res://domino_3d.tscn" id="2_7jktm"]
+[ext_resource type="PhysicsMaterial" uid="uid://jvaco1cc4p4r" path="res://Extras/physx.tres" id="3_eow3j"]
+[ext_resource type="Script" uid="uid://clfd0mjmf4ear" path="res://Scripts/camera_3d.gd" id="3_ryrav"]
+[ext_resource type="Theme" uid="uid://bi5dd1g8lbyna" path="res://Extras/frosted_glass.tres" id="4_eow3j"]
+[ext_resource type="Script" uid="uid://en2b0qygt27f" path="res://Scripts/menu.gd" id="5_7jktm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mp1hq"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_st5c4"]
+sky_material = SubResource("ProceduralSkyMaterial_mp1hq")
+
+[sub_resource type="Environment" id="Environment_a3b15"]
+background_mode = 1
+background_color = Color(0, 1, 1, 1)
+sky = SubResource("Sky_st5c4")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3b15"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a3b15"]
+material = SubResource("StandardMaterial3D_a3b15")
+size = Vector3(500, 1, 500)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_st5c4"]
+size = Vector3(500, 1, 500)
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_fc0e3")
+domino_prefab = ExtResource("2_7jktm")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a3b15")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="."]
+physics_material_override = ExtResource("3_eow3j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_a3b15")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_st5c4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 5, 12)
+script = ExtResource("3_ryrav")
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UILayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_eow3j")
+
+[node name="ParamsPanel" type="Panel" parent="UILayer/UI" groups=["UI"]]
+layout_mode = 0
+offset_left = -288.0
+offset_bottom = 720.0
+
+[node name="ParamsFlyOut" type="Button" parent="UILayer/UI/ParamsPanel"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 64.0
+offset_right = 368.0
+offset_bottom = 144.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+text = ">"
+
+[node name="VBox" type="VBoxContainer" parent="UILayer/UI/ParamsPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 280.0
+offset_bottom = 712.0
+
+[node name="Title1" type="Label" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+text = "Storage"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBox1" type="HBoxContainer" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+
+[node name="New" type="Button" parent="UILayer/UI/ParamsPanel/VBox/HBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "New"
+
+[node name="Save" type="Button" parent="UILayer/UI/ParamsPanel/VBox/HBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Save"
+
+[node name="Load" type="Button" parent="UILayer/UI/ParamsPanel/VBox/HBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Load"
+
+[node name="Export" type="Button" parent="UILayer/UI/ParamsPanel/VBox/HBox1"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Export
+"
+
+[node name="Title2" type="Label" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+text = "Topple"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBox2" type="HBoxContainer" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="UILayer/UI/ParamsPanel/VBox/HBox2"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Play"
+
+[node name="Reset" type="Button" parent="UILayer/UI/ParamsPanel/VBox/HBox2"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Reset"
+
+[node name="Title3" type="Label" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+text = "Creation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Single" type="Button" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+focus_mode = 0
+text = "Single"
+
+[node name="Line" type="Button" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+focus_mode = 0
+text = "Line"
+
+[node name="Curve" type="Button" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+focus_mode = 0
+text = "Curve"
+
+[node name="Spiral" type="Button" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+focus_mode = 0
+text = "Spiral"
+
+[node name="Title4" type="Label" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+text = "Parameters"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LineCount" type="SpinBox" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+value = 10.0
+alignment = 1
+prefix = "Line Count:"
+
+[node name="LineRotation" type="SpinBox" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+max_value = 360.0
+step = 5.0
+alignment = 1
+prefix = "Line Rotation:"
+
+[node name="CurveRadius" type="SpinBox" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+max_value = 50.0
+value = 7.0
+alignment = 1
+prefix = "Curve Radius:"
+
+[node name="CurveAngle" type="SpinBox" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+max_value = 360.0
+step = 5.0
+value = 180.0
+alignment = 1
+prefix = "Curve Angle:"
+
+[node name="CurveFullRotation" type="SpinBox" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+max_value = 360.0
+step = 5.0
+alignment = 1
+prefix = "Curve Rotation:"
+
+[node name="HBox3" type="HBoxContainer" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+
+[node name="CCW" type="Button" parent="UILayer/UI/ParamsPanel/VBox/HBox3"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "CCW"
+
+[node name="CW" type="Button" parent="UILayer/UI/ParamsPanel/VBox/HBox3"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "CW"
+
+[node name="SpiralSize" type="SpinBox" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 8.0
+alignment = 1
+prefix = "Spiral Size:"
+
+[node name="Title5" type="Label" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+text = "Environment"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackgroundColorPicker" type="ColorPickerButton" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+text = " "
+color = Color(0, 1, 1, 1)
+edit_alpha = false
+
+[node name="GroundColor" type="ColorPickerButton" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+text = " "
+color = Color(0, 1, 0, 1)
+edit_alpha = false
+
+[node name="Title6" type="Label" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+text = "Domino Color"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DominoColor" type="ColorPickerButton" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+text = " "
+color = Color(1, 1, 1, 1)
+edit_alpha = false
+
+[node name="Title7" type="Label" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+text = "Level Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelName" type="LineEdit" parent="UILayer/UI/ParamsPanel/VBox"]
+layout_mode = 2
+placeholder_text = "Level Name"
+alignment = 1
+
+[node name="BrowserPanel" type="Panel" parent="UILayer/UI" groups=["UI"]]
+visible = false
+layout_mode = 0
+offset_left = 1280.0
+offset_right = 1568.0
+offset_bottom = 720.0
+
+[node name="BrowserFlyOut" type="Button" parent="UILayer/UI/BrowserPanel"]
+layout_mode = 0
+offset_left = -80.0
+offset_top = 64.0
+offset_bottom = 144.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+text = "<"
+
+[node name="VBox" type="VBoxContainer" parent="UILayer/UI/BrowserPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 280.0
+offset_bottom = 712.0
+
+[node name="Title1" type="Label" parent="UILayer/UI/BrowserPanel/VBox"]
+layout_mode = 2
+text = "Level Browser"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ImportTextBox" type="TextEdit" parent="UILayer/UI/BrowserPanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Paste i JSON String"
+
+[node name="HBox1" type="HBoxContainer" parent="UILayer/UI/BrowserPanel/VBox"]
+layout_mode = 2
+
+[node name="Paste" type="Button" parent="UILayer/UI/BrowserPanel/VBox/HBox1"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Paste"
+
+[node name="Import" type="Button" parent="UILayer/UI/BrowserPanel/VBox/HBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Import"
+
+[node name="LevelList" type="ItemList" parent="UILayer/UI/BrowserPanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 1
+item_0/text = ":3"
+
+[node name="Menu" type="Panel" parent="UILayer/UI" groups=["UI"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_7jktm")
+
+[node name="Label" type="Label" parent="UILayer/UI/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -368.0
+offset_top = -264.0
+offset_right = 365.0
+offset_bottom = -119.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Domino Engine"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UILayer/UI/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -128.0
+offset_right = 640.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "By domino artists, for domino artists"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="UILayer/UI/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -8.0
+offset_right = 128.0
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 40
+text = "Play
+"
+
+[connection signal="toggled" from="UILayer/UI/ParamsPanel/ParamsFlyOut" to="." method="_on_params_fly_out_toggled"]
+[connection signal="pressed" from="UILayer/UI/ParamsPanel/VBox/HBox1/New" to="." method="button_new"]
+[connection signal="pressed" from="UILayer/UI/ParamsPanel/VBox/HBox1/Save" to="." method="button_save"]
+[connection signal="pressed" from="UILayer/UI/ParamsPanel/VBox/HBox1/Load" to="." method="button_load"]
+[connection signal="pressed" from="UILayer/UI/ParamsPanel/VBox/HBox1/Export" to="." method="_on_export_pressed"]
+[connection signal="pressed" from="UILayer/UI/ParamsPanel/VBox/HBox2/Play" to="." method="button_play"]
+[connection signal="pressed" from="UILayer/UI/ParamsPanel/VBox/HBox2/Reset" to="." method="button_reset"]
+[connection signal="pressed" from="UILayer/UI/ParamsPanel/VBox/Single" to="." method="button_single"]
+[connection signal="pressed" from="UILayer/UI/ParamsPanel/VBox/Line" to="." method="button_line"]
+[connection signal="pressed" from="UILayer/UI/ParamsPanel/VBox/Curve" to="." method="button_curve"]
+[connection signal="pressed" from="UILayer/UI/ParamsPanel/VBox/Spiral" to="." method="button_spiral"]
+[connection signal="value_changed" from="UILayer/UI/ParamsPanel/VBox/LineCount" to="." method="_on_line_count_value_changed"]
+[connection signal="value_changed" from="UILayer/UI/ParamsPanel/VBox/LineRotation" to="." method="_on_line_rotation_value_changed"]
+[connection signal="value_changed" from="UILayer/UI/ParamsPanel/VBox/CurveRadius" to="." method="_on_curve_radius_value_changed"]
+[connection signal="value_changed" from="UILayer/UI/ParamsPanel/VBox/CurveAngle" to="." method="_on_curve_angle_value_changed"]
+[connection signal="value_changed" from="UILayer/UI/ParamsPanel/VBox/CurveFullRotation" to="." method="_on_curve_full_rotation_value_changed"]
+[connection signal="pressed" from="UILayer/UI/ParamsPanel/VBox/HBox3/CCW" to="." method="_on_ccw_pressed"]
+[connection signal="pressed" from="UILayer/UI/ParamsPanel/VBox/HBox3/CW" to="." method="_on_cw_pressed"]
+[connection signal="value_changed" from="UILayer/UI/ParamsPanel/VBox/SpiralSize" to="." method="_on_spiral_size_value_changed"]
+[connection signal="color_changed" from="UILayer/UI/ParamsPanel/VBox/BackgroundColorPicker" to="." method="_on_background_color_picker_color_changed"]
+[connection signal="color_changed" from="UILayer/UI/ParamsPanel/VBox/GroundColor" to="." method="_on_ground_color_color_changed"]
+[connection signal="color_changed" from="UILayer/UI/ParamsPanel/VBox/DominoColor" to="." method="_on_domino_color_color_changed"]
+[connection signal="text_submitted" from="UILayer/UI/ParamsPanel/VBox/LevelName" to="." method="_on_level_name_text_submitted"]
+[connection signal="toggled" from="UILayer/UI/BrowserPanel/BrowserFlyOut" to="." method="_on_browser_fly_out_toggled"]
+[connection signal="text_set" from="UILayer/UI/BrowserPanel/VBox/ImportTextBox" to="." method="_on_import_text_box_text_set"]
+[connection signal="pressed" from="UILayer/UI/BrowserPanel/VBox/HBox1/Import" to="." method="_on_import_pressed"]
+[connection signal="pressed" from="UILayer/UI/Menu/Play" to="UILayer/UI/Menu" method="_on_play_pressed"]

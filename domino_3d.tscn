@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbmpq6yi56x30"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://jvaco1cc4p4r" path="res://Extras/physx.tres" id="1_o246h"]
+[ext_resource type="Material" uid="uid://cl5g3g5qjlbog" path="res://Extras/domino_mesh.tres" id="2_7j602"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_o246h"]
+material = ExtResource("2_7j602")
+size = Vector3(0.2, 2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o246h"]
+size = Vector3(0.2, 2, 1)
+
+[node name="Domino3D" type="RigidBody3D"]
+mass = 0.008
+physics_material_override = ExtResource("1_o246h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_o246h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_o246h")

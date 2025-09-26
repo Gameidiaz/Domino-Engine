@@ -1,0 +1,90 @@
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://bi5dd1g8lbyna"]
+
+[ext_resource type="StyleBox" uid="uid://co3sh58ywlrfw" path="res://Extras/frosted_ui.tres" id="1_opekm"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_opekm"]
+color = Color(1, 1, 1, 0.643137)
+thickness = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jage4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l42kj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hpdak"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ovtk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ns66j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_40ld8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jage4"]
+bg_color = Color(0, 0, 0, 0.556863)
+expand_margin_left = 10.0
+expand_margin_top = 30.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/styles/disabled = ExtResource("1_opekm")
+Button/styles/focus = ExtResource("1_opekm")
+Button/styles/hover = ExtResource("1_opekm")
+Button/styles/normal = ExtResource("1_opekm")
+Button/styles/pressed = ExtResource("1_opekm")
+ColorPickerButton/styles/disabled = ExtResource("1_opekm")
+ColorPickerButton/styles/focus = ExtResource("1_opekm")
+ColorPickerButton/styles/hover = ExtResource("1_opekm")
+ColorPickerButton/styles/normal = ExtResource("1_opekm")
+ColorPickerButton/styles/pressed = ExtResource("1_opekm")
+HSeparator/styles/separator = SubResource("StyleBoxLine_opekm")
+ItemList/colors/font_color = Color(1, 1, 1, 1)
+ItemList/colors/font_hovered_color = Color(1, 1, 1, 1)
+ItemList/styles/focus = SubResource("StyleBoxEmpty_jage4")
+ItemList/styles/hovered = SubResource("StyleBoxEmpty_l42kj")
+ItemList/styles/hovered_selected = SubResource("StyleBoxEmpty_hpdak")
+ItemList/styles/hovered_selected_focus = SubResource("StyleBoxEmpty_1ovtk")
+ItemList/styles/panel = ExtResource("1_opekm")
+ItemList/styles/selected = SubResource("StyleBoxEmpty_ns66j")
+ItemList/styles/selected_focus = SubResource("StyleBoxEmpty_40ld8")
+Label/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/caret_color = Color(1, 1, 1, 1)
+LineEdit/colors/clear_button_color = Color(1, 1, 1, 1)
+LineEdit/colors/clear_button_color_pressed = Color(1, 1, 1, 1)
+LineEdit/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_placeholder_color = Color(1, 1, 1, 0.6)
+LineEdit/colors/font_selected_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_uneditable_color = Color(1, 1, 1, 0.5)
+LineEdit/styles/focus = ExtResource("1_opekm")
+LineEdit/styles/normal = ExtResource("1_opekm")
+LineEdit/styles/read_only = ExtResource("1_opekm")
+OptionButton/colors/font_color = Color(1, 1, 1, 1)
+OptionButton/colors/font_disabled_color = Color(1, 1, 1, 0.5)
+OptionButton/colors/font_focus_color = Color(1, 1, 1, 1)
+OptionButton/colors/font_hover_color = Color(1, 1, 1, 1)
+OptionButton/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+OptionButton/styles/disabled = ExtResource("1_opekm")
+OptionButton/styles/disabled_mirrored = ExtResource("1_opekm")
+OptionButton/styles/focus = ExtResource("1_opekm")
+OptionButton/styles/hover = ExtResource("1_opekm")
+OptionButton/styles/hover_mirrored = ExtResource("1_opekm")
+OptionButton/styles/normal = ExtResource("1_opekm")
+OptionButton/styles/normal_mirrored = ExtResource("1_opekm")
+OptionButton/styles/pressed = ExtResource("1_opekm")
+OptionButton/styles/pressed_mirrored = ExtResource("1_opekm")
+Panel/styles/panel = ExtResource("1_opekm")
+TextEdit/colors/caret_color = Color(1, 1, 1, 1)
+TextEdit/colors/font_color = Color(1, 1, 1, 1)
+TextEdit/colors/font_placeholder_color = Color(1, 1, 1, 0.6)
+TextEdit/colors/font_readonly_color = Color(1, 1, 1, 0.5)
+TextEdit/colors/search_result_color = Color(1, 1, 1, 1)
+TextEdit/colors/selection_color = Color(1, 1, 1, 1)
+TextEdit/styles/focus = ExtResource("1_opekm")
+TextEdit/styles/normal = ExtResource("1_opekm")
+TextEdit/styles/read_only = ExtResource("1_opekm")
+Window/colors/title_color = Color(1, 1, 1, 1)
+Window/styles/embedded_border = SubResource("StyleBoxFlat_jage4")
